@@ -1,0 +1,53 @@
+intro to Babel
+
+1. Explain what babel does for you?
+  - Babel allows us to transform or transpile ES6/modern JavScript into older ES5 syntax.
+  -example: => in ES6 becomes function()
+  
+2. Demonstrate how babel transpiles javascript using a “repl”
+  - var a = () => {};
+var a = (b) => b;
+
+const double = [1,2,3].map((num) => num * 2);
+console.log(double); // [2,4,6]
+
+var bob = {
+  _name: "Bob",
+  _friends: ["Sally", "Tom"],
+  printFriends() {
+    this._friends.forEach(f =>
+      console.log(this._name + " knows " + f));
+  }
+};
+console.log(bob.printFriends());
+
+becomes 
+
+var a = function () {};var a = function (b) {
+  return b;
+};
+
+const double = [1, 2, 3].map(function (num) {
+  return num * 2;
+});console.log(double); // [2,4,6]
+
+var bob = {
+  _name: "Bob",
+  _friends: ["Sally", "Tom"],
+  printFriends() {
+    var _this = this;
+
+    this._friends.forEach(function (f) {
+      return console.log(_this._name + " knows " + f);
+    });
+  }
+};
+console.log(bob.printFriends());
+
+
+3. Install babel in your web project
+  - npm install --save-dev @babel/core @babel/cli
+
+
+4. Transpile all modern (ES6+) javascript in a project to browser-compatible JavaScript with one command (npm script)
+  -npm babel script.js
